@@ -5,7 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Xpath Tester by ScrapFly.io</title>
   <link rel="stylesheet" href="/xpath-tester/style/bulma.min.css">
+  <link rel="stylesheet" href="/xpath-tester/style/main.css">
   <link rel="stylesheet" href="/xpath-tester/style/codemirror.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-xpath/0.3.1/jquery.xpath.min.js" ></script>
+  <script src="/xpath-tester/script/codemirror.js" ></script>
+  <script src="/xpath-tester/script/xml.js" ></script>
+  <script src="/xpath-tester/script/main.js" ></script>
 
 </head>
 
@@ -19,50 +25,14 @@
         <!-- input editor will be inserted here by js -->
       </div>
       <div id="xpath-input" title="xpath input field">
-        <input class="form-control input" type="text" id="xpath" value="//p" placeholder="enter your xpath here">
+        <input class="input" type="text" id="xpath" value="//p" placeholder="enter your xpath here">
       </div>
       <hr>
       <div id="result" class="box" title="xpath results">
         <!-- results editor will be inserted here by js -->
       </div>
-      <script src="/xpath-tester/script/codemirror.js"></script>
-      <script src="/xpath-tester/script/xml.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-xpath/0.3.1/jquery.xpath.min.js"></script>
-      <script src="/xpath-tester/script/main.js"></script>
-      <script>
-        var result = CodeMirror(function (elt) {
-          $("#result").append(elt);
-        }, {
-          value: "",
-          lineNumbers: false,
-          mode: "xml"
-        });
-
-        var editor = CodeMirror(function (elt) {
-          $("#editor").append(elt);
-        }, {
-          value: `<html>
-  <head>
-    <title>Page Title</title>
-  </head>
-  <body>
-    <h1 class="title">Page header by <a href="#">company</a></h1>
-    <p>This is the first paragraph</p>
-    <p>This is the second paragraph</p>
-  </body>
-</html>`,
-          mode: "xml"
-        });
-      var urlParams = new URLSearchParams(window.location.search)
-      if (urlParams.get('html')){
-        editor.getDoc().setValue(atob(urlParams.get('html').replaceAll(' ', '+')))
-      }
-      if (urlParams.get('xpath')){
-        $("#xpath").val(atob(urlParams.get('xpath').replaceAll(' ', '+')))
-      }
-      </script>
-
+      Share: <input id="share" class="input">
+      </div>
     </div>
   </section>
 </body>
