@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "bulma": "^0.9.3",
+    "codemirror": "^5.65.0"
+  }
+}

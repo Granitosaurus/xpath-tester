@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Xpath Tester by ScrapFly.io</title>
+  <link rel="stylesheet" href="/style/bulma.min.css">
+  <link rel="stylesheet" href="/style/codemirror.css">
+
+</head>
+
+<body>
+  <section class="section">
+    <div class="container">
+      <h1 class="title has-text-centered">
+        Xpath Tester by <a href="https://scrapfly.io/">ScrapFly</a>
+      </h1>
+      <div id="editor" class="box" title="html target editor">
+        <!-- input editor will be inserted here by js -->
+      </div>
+      <div id="xpath-input" title="xpath input field">
+        <input class="form-control input" type="text" id="xpath" value="//p" placeholder="enter your xpath here">
+      </div>
+      <hr>
+      <div id="result" class="box" title="xpath results">
+        <!-- results editor will be inserted here by js -->
+      </div>
+      <script src="/script/codemirror.js"></script>
+      <script src="/script/xml.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-xpath/0.3.1/jquery.xpath.min.js"></script>
+      <script src="/script/main.js"></script>
+      <script>
+        var result = CodeMirror(function (elt) {
+          $("#result").append(elt);
+        }, {
+          value: "",
+          lineNumbers: false,
+          mode: "xml"
+        });
+
+        var editor = CodeMirror(function (elt) {
+          $("#editor").append(elt);
+        }, {
+          value: `<html>
+  <head>
+    <title>Page Title</title>
+  </head>
+  <body>
+    <h1 class="title">Page header by <a href="#">company</a></h1>
+    <p>This is the first paragraph</p>
+    <p>This is the second paragraph</p>
+  </body>
+</html>`,
+          mode: "xml"
+        });
+      var urlParams = new URLSearchParams(window.location.search)
+      if (urlParams.get('html')){
+        editor.getDoc().setValue(atob(urlParams.get('html').replaceAll(' ', '+')))
+      }
+      if (urlParams.get('xpath')){
+        $("#xpath").val(atob(urlParams.get('xpath').replaceAll(' ', '+')))
+      }
+      </script>
+
+    </div>
+  </section>
+</body>
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      <strong>Xpath Tester</strong> by <a href="https://scrapfly.io">ScrapFly</a> 💙. 
+      Learn about xpath: <a href="https://scrapfly.io/blog/web-scraping-with-xpath"> Web Scraping With Xpath</a>.
+    </p>
+    <p>
+      The source code is licensed
+      <a href="https://github.com/scrapfly/tools">MIT on Github</a>. The website content
+      is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+    </p>
+  </div>
+</footer>
+</html>
