@@ -45,7 +45,7 @@ function initEditors() {
 function createShareLink() {
   let html = btoa(editor.getDoc().getValue());
   let xpath = btoa($xpath.val());
-  let new_url = new URL(window.location.href);
+  let new_url = new URL(window.location.href.trim('/') + "#editor");
   new_url.searchParams.set('html', html);
   new_url.searchParams.set('xpath', xpath);
   $("#share").val(new_url);
