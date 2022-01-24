@@ -14,3 +14,12 @@ Live at: http://granitosaur.us/xpath-tester/
 - "html=<base64 text>"\* - sets html input to provided value on load
 
 \* - note that browsers often have url limit so you should keep these short
+
+## Extras
+
+Css selectors also provide extra pseudo-elements as used in [parsel] package:
+
+- `::attr(<name>)` - will extract node's attribute. e.g. `span::attr(class)` will return class attribute (`foo`) of `<span class="foo">` node
+- `::text` - will extract node's text value. e.g. `span::text` will return `foo` of `<span>foo</span>` node.
+ 
+[parsel]: https://github.com/scrapy/parsel
