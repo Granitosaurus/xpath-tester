@@ -3,8 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Xpath Tester by ScrapFly.io</title>
+  <meta name="description" content="Interactive tester for Xpath and Css selector in HTML parsing.">
+  <meta name="keywords" content="HTML, CSS, XPATH, PARSING">
+  <meta name="author" content="Bernardas Ališauskas">
+  <title>Xpath and Css Selector Tester by ScrapFly.io</title>
   <link rel="stylesheet" href="/xpath-tester/style/bulma.min.css">
+  <link rel="stylesheet" href="/xpath-tester/style/bulma-switch.min.css">
   <link rel="stylesheet" href="/xpath-tester/style/main.css">
   <link rel="stylesheet" href="/xpath-tester/style/codemirror.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
@@ -12,35 +16,84 @@
   <script src="/xpath-tester/script/codemirror.js" ></script>
   <script src="/xpath-tester/script/xml.js" ></script>
   <script src="/xpath-tester/script/main.js" ></script>
-
+  <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "ScrapFly",
+        "url": "https://scrapfly.io",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://scrapfly.io/img/logo.png"
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Bernardas Ališauskas",
+        "email": "bernard@scrapecrow.com",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://scrapfly.io/blog/content/images/2021/12/me-bw-low-contrast.jpg",
+            "width": 1000,
+            "height": 1000
+        },
+        "url": "https://scrapfly.io/blog/author/scrapecrow/",
+        "sameAs": [
+            "https://scrapecrow.com"
+        ]
+    },
+    "headline": "",
+    "url": "",
+    "keywords": "xpath, css, selector, tester",
+    "description": "Interactive css and xpath selector tester by ScrapFly",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://scrapfly.io/tools"
+    }
+}
+</script>
 </head>
 
 <body>
   <section class="section">
     <div class="container">
       <h1 class="title has-text-centered">
-        Xpath Tester by <a href="https://scrapfly.io/">ScrapFly</a>
+        Xpath/Css Tester by <a href="https://scrapfly.io/">ScrapFly</a>
       </h1>
       <div id="editor" class="box" title="html target editor">
         <!-- input editor will be inserted here by js -->
       </div>
-      <div id="xpath-input" title="xpath input field">
+      <div class="inline-inp" id="xpath-input" title="xpath input field">
         <input class="input" type="text" id="xpath" value="//p" placeholder="enter your xpath here">
+        <div id="input-switch">
+          <label for="useCss">xpath</label>
+          <input id="useCss" type="checkbox" name="switchExample" class="switch is-info">
+          <label for="useCss">css</label>
+        </div>
       </div>
       <hr>
       <div id="result" class="box" title="xpath results">
         <!-- results editor will be inserted here by js -->
       </div>
+      <div class="inline-inp">
       Share: <input id="share" class="input">
       </div>
+      </div>
+
     </div>
   </section>
 </body>
 <footer class="footer">
   <div class="content has-text-centered">
     <p>
-      <strong>Xpath Tester</strong> by <a href="https://scrapfly.io">ScrapFly</a> 💙. 
-      Learn about xpath: <a href="https://scrapfly.io/blog/web-scraping-with-xpath"> Web Scraping With Xpath</a>.
+      <strong>Xpath and Css Selector Tester</strong> by <a href="https://scrapfly.io">ScrapFly</a> 💙
+    </p>
+    <p>
+      Learn more: 
+      <a href="https://scrapfly.io/blog/web-scraping-with-xpath"> Web Scraping With Xpath</a> and
+      <a href="https://scrapfly.io/blog/web-scraping-with-css"> Web Scraping With Css</a>.
     </p>
     <p>
       The source code is licensed

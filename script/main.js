@@ -30,15 +30,28 @@ function initEditors() {
     mode: "xml"
   });
   var urlParams = new URLSearchParams(window.location.search)
+  // preloads html input
   if (urlParams.get('html')) {
     editor.getDoc().setValue(atob(urlParams.get('html').replaceAll(' ', '+')))
   }
+  // switch to css input type
+  if (urlParams.get('css')){
+    $("#useCss").prop("checked", true);
+    $("#xpath").val("h1.title::attr(class)");
+  }
+  // preloads xpath input
   if (urlParams.get('xpath')) {
     $("#xpath").val(atob(urlParams.get('xpath').replaceAll(' ', '+')))
   }
-  $xpath.on('keyup', evalXPathUpdateResult);
+  // switch=0 disabled input type switch
+  if (urlParams.get('switch') === "0"){
+    $("#input-switch").hide();
+  }
+  $xpath.on('keyup', evalSelectorUpdateResult);
   $xpath.on('keyup', createShareLink);
-  $("#editor").on('keyup', evalXPathUpdateResult);
+  $("#useCss").on('click', evalSelectorUpdateResult);
+  $("#useCss").on('click', createShareLink);
+  $("#editor").on('keyup', evalSelectorUpdateResult);
   $("#editor").on('keyup', createShareLink);
 }
 
@@ -48,14 +61,13 @@ function createShareLink() {
   let new_url = new URL(window.location.href.trim('/') + "#editor");
   new_url.searchParams.set('html', html);
   new_url.searchParams.set('xpath', xpath);
+  if ($('#useCss').is(':checked')){
+    new_url.searchParams.set('css', 1)
+  }
   $("#share").val(new_url);
-  // $share.val(new_url.toString());
   return new_url.toString();
-  // window.open(new_url.toString(), '_blank');
 }
 
-
-// $(function () {
 
 function evalXPath() {
   var $node = $($.parseXML(editor.getDoc().getValue()));
@@ -63,8 +75,30 @@ function evalXPath() {
     return ""
   }
   var xpathExpr = $xpath.val();
-  console.log('expr', xpathExpr);
+  console.log('xpath expr', xpathExpr);
   return $node.xpath(xpathExpr);
+}
+
+function evalCss(){
+  var $node = $($.parseXML(editor.getDoc().getValue()));
+  if ($node == undefined) {
+    return ""
+  }
+  var cssExpr = $xpath.val();
+  console.log('css expr', cssExpr);
+
+  // handle ::attr(<name>) pseudo element functionality
+  attrPseudo = cssExpr.match(/attr\((.+?)\)/)
+  if (attrPseudo){
+    return $node.find(cssExpr.split("::attr")[0]).map(
+      (i, el) => {return el.attributes !== undefined ? el.attributes[attrPseudo[1]].value: ""}
+      );
+  }
+  // handle ::text pseudo element functionality
+  if (cssExpr.endsWith("::text")){
+    return $($node.find(cssExpr.replace('::text', ""))[0]).xpath('.//text()');
+  }
+  return $node.find(cssExpr);
 }
 
 function nodeToString(node) {
@@ -79,29 +113,27 @@ function nodeToString(node) {
   return node.outerHTML;
 }
 
-function evalXPathUpdateResult() {
+function evalSelectorUpdateResult() {
   try {
-    var nodes = evalXPath();
+    var nodes = $('#useCss').is(':checked') ? evalCss(): evalXPath() ;
     var htmlNodes = $.map(nodes, function (node) {
       return nodeToString(node);
     });
 
     result.getDoc().setValue(htmlNodes.join('\n'))
-    $xpath.attr('aria-invalid', 'false'),
-      $xpath.removeClass("is-danger")
-    $xpath.addClass("is-success")
+    $xpath.attr('aria-invalid', 'false');
+    $xpath.removeClass("is-danger");
+    $xpath.addClass("is-success");
     console.info('nodes', nodes);
   } catch (e) {
-    $xpath.removeClass("is-success")
-    $xpath.addClass("is-danger")
-    result.getDoc().setValue("ERROR: " + e.message)
+    $xpath.removeClass("is-success");
+    $xpath.addClass("is-danger");
+    result.getDoc().setValue("ERROR: " + e.message);
     console.error(e);
   }
 }
 
-// })
-
 document.addEventListener("DOMContentLoaded", function() {
     initEditors(); 
-    evalXPathUpdateResult();
+    evalSelectorUpdateResult();
 });

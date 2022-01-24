@@ -1,3 +1,13 @@
 .CodeMirror {
     height: auto !important;
 }
+
+.inline-inp {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#input-switch {
+    display: contents;
+}
