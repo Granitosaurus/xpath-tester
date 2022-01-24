@@ -1,4 +1,4 @@
-# Xpath Tester Tool
+# Xpath and Css Selector Tester Tool
 
 Standalone tool for testing xpath. Licensed GPLv3
 
