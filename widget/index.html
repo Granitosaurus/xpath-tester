@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interactive tester for Xpath and Css selector in HTML parsing.">
+  <meta name="keywords" content="HTML, CSS, XPATH, PARSING">
+  <meta name="author" content="Bernardas Ališauskas">
+  <title>Xpath and Css Selector Tester by ScrapFly.io</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-xpath/0.3.1/jquery.xpath.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.3/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.3/mode/xml/xml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.3/beautify-html.min.js"></script>
+</head>
+
+<body>
+  <!-- first widget embed: simple example -->
+  <selector-widget input="//a">
+    <div>
+      <h2>some links:</h2>
+      <a href="https://scrapfly.io">some link</a>
+      <a href="https://scrapfly.io">some link2</a>
+    </div>
+  </selector-widget>
+  <hr>
+
+  <!-- second widget embed: show off css mode -->
+  <selector-widget input="a::attr(href)" mode="css">
+    <div>
+      <h2>some links:</h2>
+      <a href="https://scrapfly.io/">some link</a>
+      <a href="https://scrapfly.io/blog/">some link2</a>
+      <a href="https://scrapfly.io/pricing/">some link3</a>
+    </div>
+  </selector-widget>
+  <hr>
+
+  <!-- third widget embed: show off escaped content -->
+  <selector-widget input="a::attr(href)" mode="css">
+    &lt;div&gt;
+      &lt;h2&gt;some links:&lt;/h2&gt;
+      &lt;a href=&quot;https://scrapfly.io/&quot;&gt;some link&lt;/a&gt;
+      &lt;a href=&quot;https://scrapfly.io/blog/&quot;&gt;some link2&lt;/a&gt;
+      &lt;a href=&quot;https://scrapfly.io/pricing/&quot;&gt;some link3&lt;/a&gt;
+    &lt;/div&gt;
+  </selector-widget>
+
+
+
+
+</body>
+<footer>
+  <script src="widget.js"></script>
+</footer>
+
+</html>
